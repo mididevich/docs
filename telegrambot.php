@@ -11,6 +11,11 @@
     $hunt_place = [["тундре"],["саване"],["кустарнике"],["полумраке бара"],["зарослях конопли"],["перезоде метро"],["офисе роскомнадзора"]];
     $top_hunt = [[0],['nickname']];
     if ($text){
+        if ($text == "/start") {
+            $reply = "Добро пожаловать в бота!";
+            $reply_markup = $telegram->replyKeyboardMarkup([ 'keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false ]);
+            $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup ]);
+        }
         if($text == "!копать"){
             $numer_place =  mt_rand(0, count($hunt_place) - 1);
             $number_hunt =  mt_rand(0, count($hunt) - 1);
