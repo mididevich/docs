@@ -35,11 +35,15 @@
     $kop_place = array('Гималаях', 'углу', 'Интернете', 'архиве', 'кармане', 'винчестере', 'бабушкином огороде', 'цветочном горшке', 'старом сортире', 'собственной памяти');
     $top_kop = array(0, 'nickname', 'kop');
     if ($text){
-        if ($text == "/start") {
-            $reply = "Добро пожаловать в бота!";
-            $reply_markup = $telegram->replyKeyboardMarkup([ 'keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false ]);
-            $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup ]);
-        }
+        $bot->command('start', function ($message) use ($bot) {
+            $answer = 'Добро пожаловать!';
+            $bot->sendMessage($message->getChat()->getId(), $answer);
+        });
+        $bot->command('help', function ($message) use ($bot) {
+        $answer = 'Команды:
+        /help - помощ';
+        $bot->sendMessage($message->getChat()->getId(), $answer);
+        });
         if($text == "!охота"){
             $numer1 =  rand(0, count($hunt_place));
             $number2 =  rand(0, count($hunt));
